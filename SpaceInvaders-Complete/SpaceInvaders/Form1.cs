@@ -196,10 +196,10 @@ namespace SpaceInvaders
 
         private void gunFire()
         {
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer();
-            player.SoundLocation = @"C:\Users\Root\Music\gun.wav";
-            player.Load();
-            player.Play();
+            //System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+            //player.SoundLocation = @"C:\Users\Root\Music\gun.wav";
+            //player.Load();
+            //player.Play();
         }
     }
 }
