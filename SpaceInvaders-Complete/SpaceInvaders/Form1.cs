@@ -20,7 +20,7 @@ namespace SpaceInvaders
         bool isPressed;
         int totalEnemies = 24;
         int playerSpeed = 6;
-        int ammo = 24;
+        int ammo = 50;
 
 
         public Form1()
@@ -88,7 +88,7 @@ namespace SpaceInvaders
             {
                 //identifies that the picture box is of tag invader, this allows all oicture boxes with this tag 
                 if (x is PictureBox && 
-                    x.Tag == "invader")
+                    (string)x.Tag == "invader")
                 {
                     if (((PictureBox)x).Bounds.IntersectsWith(player.Bounds))
                     {
@@ -109,7 +109,7 @@ namespace SpaceInvaders
 
             foreach (Control y in this.Controls)
             {
-                if (y is PictureBox && y.Tag == "bullet")
+                if (y is PictureBox && (string)y.Tag == "bullet")
                 {
                     y.Top -= 20;
                     if (((PictureBox)y).Top < this.Height - 490)
@@ -123,9 +123,9 @@ namespace SpaceInvaders
             {
                 foreach (Control j in this.Controls)
                 {
-                    if (i is PictureBox && i.Tag == "invader")
+                    if (i is PictureBox && (string)i.Tag == "invader")
                     {
-                        if (j is PictureBox && j.Tag == "bullet")
+                        if (j is PictureBox && (string)j.Tag == "bullet")
                         {
                             if (i.Bounds.IntersectsWith(j.Bounds))
                             {
