@@ -159,7 +159,6 @@ namespace SpaceInvaders
                 bullet.Top = player.Top - 20;
                 this.Controls.Add(bullet);
                 bullet.BringToFront();
-                gunFire();
                 ammo--;
                 label2.Text = "Ammo :" + ammo;
             }
@@ -192,14 +191,6 @@ namespace SpaceInvaders
             label4.Visible = true;
             MessageBox.Show("You beat them!");
             Close();
-        }
-
-        private void gunFire()
-        {
-            //System.Media.SoundPlayer player = new System.Media.SoundPlayer();
-            //player.SoundLocation = @"C:\Users\Root\Music\gun.wav";
-            //player.Load();
-            //player.Play();
         }
     }
 }
