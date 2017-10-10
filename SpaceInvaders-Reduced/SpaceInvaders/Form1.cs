@@ -13,8 +13,8 @@ namespace SpaceInvaders
     public partial class Form1 : Form
     {
 
-        bool goleft;
-        bool goright;
+        bool goLeft;
+        bool goRight;
         int speed = 5;
         int score = 0;
         bool isPressed;
@@ -31,15 +31,7 @@ namespace SpaceInvaders
         private void keyisdown(object sender, KeyEventArgs e)
         {
             //movement for spaceship
-            if (e.KeyCode == Keys.Left)
-            {
-                goleft = true;
-            }
-
-            if (e.KeyCode == Keys.Right)
-            {
-                goright = true;
-            }
+            
 
             //shoot
             if(e.KeyCode == Keys.Space && !isPressed)
@@ -54,12 +46,12 @@ namespace SpaceInvaders
             //movement for when the button isn't pressed - therefore is false as no instruction is given
             if (e.KeyCode == Keys.Left)
             {
-                goleft = false;
+                goLeft = false;
             }
 
             if (e.KeyCode == Keys.Right)
             {
-                goright = false;
+                goRight = false;
             }
 
             if (isPressed)
@@ -70,20 +62,19 @@ namespace SpaceInvaders
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if(goleft)
+            if(goLeft)
             {
                 player.Left -= playerSpeed;
             }
 
-            else if (goright)
+            else if (goRight)
             {
                 player.Left += playerSpeed;
             }
 
         //end of player moving left and right
 
-        //enemies moving on the form
-
+        //Enemy Movement
             foreach (Control x in this.Controls)
             {
                 //identifies that the picture box is of tag invader, this allows all oicture boxes with this tag 
@@ -101,12 +92,12 @@ namespace SpaceInvaders
                     {
                         ((PictureBox)x).Top += ((PictureBox)x).Height + 10;
                         ((PictureBox)x).Left = -50;
-
                     }
                 }
             }
             //end of enemies moving
 
+            /*--Collision Detection--*/
             foreach (Control y in this.Controls)
             {
                 if (y is PictureBox && (string)y.Tag == "bullet")
@@ -138,6 +129,8 @@ namespace SpaceInvaders
                 }
             }
             //bullet and enemy collison ends
+
+            // tidy up score
             label1.Text = "Score :" + score;
 
             if( score>= totalEnemies)
@@ -149,24 +142,23 @@ namespace SpaceInvaders
         private void makeLaser()
         {
             //create a picturebox with the laser picture in it. If it is greater then or equal to one then the user can shoot
-            if (ammo >= 1)
-            {
-                PictureBox bullet = new PictureBox();
-                bullet.Image = Properties.Resources.bullet;
-                bullet.Size = new Size(2, 20);
-                bullet.Tag = "bullet";
-                bullet.Left = player.Left + player.Width / 2;
-                bullet.Top = player.Top - 20;
-                this.Controls.Add(bullet);
-                bullet.BringToFront();
-                ammo--;
-                label2.Text = "Ammo :" + ammo;
-            }
-            else if (ammo == 0)
-            {
-                gamerOverAmmo();
-            }
 
+            /*
+             * If there is ammo :
+                    PictureBox bullet = new PictureBox();
+                    bullet.Image = Properties.Resources.bullet;
+                    bullet.Size = new Size(2, 20);
+                    bullet.Tag = "bullet";
+                    bullet.Left = player.Left + player.Width / 2;
+                    bullet.Top = player.Top - 20;
+                    this.Controls.Add(bullet);
+                    bullet.BringToFront();
+                    ammo--;
+                    label2.Text = "Ammo :" + ammo;
+
+             * If there is no ammo
+             *  gamerOverAmmo();
+             */
         }
 
         private void gamerOver()
