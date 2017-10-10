@@ -20,7 +20,7 @@ namespace SpaceInvaders
         bool isPressed;
         int totalEnemies = 24;
         int playerSpeed = 6;
-        int ammo = 24;
+        int ammo = 50;
 
 
         public Form1()
@@ -87,8 +87,8 @@ namespace SpaceInvaders
             foreach (Control x in this.Controls)
             {
                 //identifies that the picture box is of tag invader, this allows all oicture boxes with this tag 
-                if (x is PictureBox && 
-                    x.Tag == "invader")
+                if (x is PictureBox &&
+                    (string)x.Tag == "invader")
                 {
                     if (((PictureBox)x).Bounds.IntersectsWith(player.Bounds))
                     {
@@ -109,7 +109,7 @@ namespace SpaceInvaders
 
             foreach (Control y in this.Controls)
             {
-                if (y is PictureBox && y.Tag == "bullet")
+                if (y is PictureBox && (string)y.Tag == "bullet")
                 {
                     y.Top -= 20;
                     if (((PictureBox)y).Top < this.Height - 490)
@@ -123,9 +123,9 @@ namespace SpaceInvaders
             {
                 foreach (Control j in this.Controls)
                 {
-                    if (i is PictureBox && i.Tag == "invader")
+                    if (i is PictureBox && (string)i.Tag == "invader")
                     {
-                        if (j is PictureBox && j.Tag == "bullet")
+                        if (j is PictureBox && (string)j.Tag == "bullet")
                         {
                             if (i.Bounds.IntersectsWith(j.Bounds))
                             {
@@ -159,7 +159,6 @@ namespace SpaceInvaders
                 bullet.Top = player.Top - 20;
                 this.Controls.Add(bullet);
                 bullet.BringToFront();
-                gunFire();
                 ammo--;
                 label2.Text = "Ammo :" + ammo;
             }
@@ -192,14 +191,6 @@ namespace SpaceInvaders
             label4.Visible = true;
             MessageBox.Show("You beat them!");
             Close();
-        }
-
-        private void gunFire()
-        {
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer();
-            player.SoundLocation = @"C:\Users\Root\Music\gun.wav";
-            player.Load();
-            player.Play();
         }
     }
 }
